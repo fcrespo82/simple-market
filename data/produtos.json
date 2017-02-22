@@ -1,6 +1,6 @@
 [{"id":"1","nome":"Arroz","comprado":"nao"},
  {"id":"2","nome":"Batata","comprado":"nao"},
- {"id":"3","nome":"Café","comprado":"sim"},
+ {"id":"3","nome":"Café","comprado":"nao"},
  {"id":"4","nome":"Detergente","comprado":"nao"},
  {"id":"5","nome":"Espinafre","comprado":"nao"},
  {"id":"6","nome":"Farinha","comprado":"nao"},
