@@ -15,7 +15,7 @@
 
             var payload = {
                 client_id: self.CLIENT_ID,
-                redirect_uri: "http://localhost:8000#!/github/authorized",
+                redirect_uri: "https://fcrespo82.github.io/simple-market/github/authorized",
                 scope: "gist",
                 state: "",
                 allow_signup: "true"
@@ -34,7 +34,7 @@
                 client_id: self.CLIENT_ID,
                 client_secret: self.CLIENT_SECRET,
                 code: code,
-                redirect_uri: "http://localhost:8000#!/github/authorized",
+                redirect_uri: "https://fcrespo82.github.io/simple-market/github/authorized",
                 state: ""
             };
 
