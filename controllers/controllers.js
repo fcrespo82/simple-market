@@ -1,8 +1,11 @@
-/* globals confirm */
 'use strict';
-angular.module('SimpleMarket', []).controller('ProdutosCtrl',
-[ '$scope', '$http', function($scope, $http) {
-	$http.get('data/produtos.json').success(function(data) {
+var app = angular.module('SimpleMarket')
+
+app.controller('ProdutosCtrl',
+[ '$scope', '$http', 'GitHubService', function($scope, $http, GitHubService) {
+	var self = this;
+
+	$http.get('data/produtos.json').then(function(data) {
 		var status = localStorage.getItem("status");
 		if (status == null) {
 			for (var i = 0; i < data.length; i++) {

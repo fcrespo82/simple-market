@@ -1,3 +1,5 @@
+body { padding-top: 70px; }
+
 .list-group-item:hover{
 	color: #3a87ad;
     background-color: #d9edf7;

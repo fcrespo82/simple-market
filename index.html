@@ -1,41 +1,50 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
-<title>Simple Market</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<link rel="shortcut icon" type="image/x-icon" href="Fasticon-Shop-Cart-Shop-cart.ico">
-<link rel="stylesheet" href="css/bootstrap.css" media="screen">
-<link rel="stylesheet" href="css/custom.css" media="screen">
+	<title>Simple Market</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="shortcut icon" type="image/x-icon" href="Fasticon-Shop-Cart-Shop-cart.ico">
+	<link rel="stylesheet" href="css/bootstrap.css" media="screen">
+	<link rel="stylesheet" href="css/custom.css" media="screen">
 
-<script src="js/angular.min.js"></script>
-<script src="js/jquery.min.js" />
-<script src="js/bootstrap.min.js"></script>
+	<script src="//code.angularjs.org/1.6.2/angular.min.js"></script>
+	<script src="//code.angularjs.org/1.6.2/angular-route.min.js"></script>
+	<script src="js/jquery.min.js" />
+	<script src="js/bootstrap.min.js"></script>
 
-<!--<script src="js/angular-route.js"></script> -->
-<!-- Onde ficarao as nossas rotas -->
-<!--<script src="app.js"></script> -->
-<!-- -->
-<!-- Onde ficarao os nossos controllers -->
-<script src="controllers/controllers.js"></script>
-<!-- -->
-<!-- Onde ficarao as nossas diretivas -->
-<!-- <script src="directives.js"></script> -->
-<!-- -->
-<!-- Onde ficarao os nossos serviços -->
-<script src="services/services.js"></script> 
-						
-<!-- Material Design Bootstrap -->
-<!--<link href="css/mdb.css" rel="stylesheet">-->
+	<base href="/" />
+
+	<!-- Onde ficarao as nossas rotas -->
+	<script src="app.js"></script>
+
+	<!-- Onde ficarao os nossos controllers -->
+	<script src="controllers/controllers.js"></script>
+	<script src="controllers/GitHubController.js"></script>
+
+	<!-- Onde ficarao os nossos serviços -->
+	<script src="services/services.js"></script>
+	<script src="services/GitHubService.js"></script>
+
+
+	<!-- -->
+	<!-- -->
+	<!-- Onde ficarao as nossas diretivas -->
+	<!-- <script src="directives.js"></script> -->
+	<!-- -->
+
+	<!-- Material Design Bootstrap -->
+	<!--<link href="css/mdb.css" rel="stylesheet">-->
 </head>
+
 <body ng-app="SimpleMarket">
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
-				<a href="#" class="navbar-brand">Angular JS</a>
-				<button class="navbar-toggle" type="button" data-toggle="collapse"
-					data-target="#navbar-main">
+				<a href="/" class="navbar-brand">Simple Market</a>
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
 					<span class="icon-bar" /> <span class="icon-bar" /> <span
 						class="icon-bar" />
 				</button>
@@ -43,113 +52,27 @@
 			<div class="navbar-collapse collapse" id="navbar-main">
 				<ul class="nav navbar-nav">
 
-
-					<li class="dropdown"><a class="dropdown-toggle"
-						data-toggle="dropdown" href="#" id="actions">SimpleMarket <span
-							class="caret" />
+					<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#" id="actions">Simple Market<span class="caret" />
 					</a>
 						<ul class="dropdown-menu" aria-labelledby="actions">
 							<li><a href="#">Importar Lista</a></li>
 							<li class="divider" />
 							<li><a href="#">Exportar Lista</a></li>
-						</ul></li>
+						</ul>
+					</li>
+
+					<li><a href="github">GitHub</a></li>
+
 				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="http://builtwithbootstrap.com/" target="_blank">Built
-							With Bootstrap</a></li>
-				</ul>
 
 			</div>
 		</div>
 	</div>
-	<p>
-		<br />
-	</p>
-	<div class="container" ng-controller="ProdutosCtrl">
-		<div class="page-header row" id="banner">
-			<div class="col-md-12">
-				<div class="col-lg-6 col-md-6 col-sm-6 pull-left">
-					<h2>SimpleMarket</h2>
-					<p class="lead">Lista de Compras</p>
-				</div>
-				<div class="col-lg-6 col-md-6 col-sm-6">
-					<button type="submit" class="btn btn-default pull-right" ng-click="finalizar();">
-						Finalizar<br />{{listaComprados.length}} itens<br />Faltam:<br />{{listaNaoComprados.length-1}} itens
-					</button>
-				</div>
-			</div>
-		</div>
 
-		<form>
-			<div class="col-lg-12 col-md-12 col-sm-12">
-				<div class="row">
-					<div class="list-group table-of-contents">
-						<div class="list-group-item" ng-repeat="(key, value) in lista"
-							ng-class="{'list-group-item-success': value == 'sim'}"
-							ng-hide="key =='status'" ng-click="selecionar(key);">
-							<b>{{key}}</b>
-							<button ng-show="value == 'nao'" type="submit"
-								class="pull-right btn btn-sm" ng-click="comprarProduto(key);">
-								Comprar</button>
+	<div class="container">
+		<div ng-view></div>
+	</div>
 
-							<button ng-show="value == 'sim'" type="submit"
-								class="pull-right btn btn-sm btn-success"
-								ng-click="devolverProduto(key);">Comprado</button>
-
-							<br /> <br />
-						</div>
-		</form>
-	<!--	<ul class="pager">
-			<li><a href="<">Anterior</a></li>
-			<li><a href=">">Próxima</a></li>
-		</ul> -->
-	</div>
-	</div>
-	</div>
-	<div class="col-lg-12 col-md-12 col-sm-12"></div>
-	<div class="col-lg-12 col-md-12 col-sm-12">
-		<div class="well bs-component row">
-			<form class="form-inline">
-				<fieldset>
-					<legend>Produto</legend>
-					<label for="inputNome" class="col-lg-2 control-label">Nome</label>
-					<div class="col-md-7 col-sm-10" style="margin-bottom:25px">
-						<div class="input-group col-md-12">
-						  <input type="text" class="form-control" name="inputNome"
-							 ng-model="inputNome" placeholder="Nome">
-						  <div class="input-group-btn">
-						    	<button type="button"
-								class="btn"
-								ng-click="inputNome = ''">
-								&times;
-							</button>
-						  </div>
-						</div>
-					</div>
-					<div class="col-md-3 col-sm-12">											
-						<button type="submit" class="btn-special btn btn-md btn-primary"
-							ng-click="removerProduto(inputNome);">&times; Remove item
-						</button>
-						<button type="submit" class="btn-special btn btn-md btn-info pull-right"
-							ng-click="adicionarProduto(inputNome);">
-							<span class="glyphicon glyphicon-plus" /> </span> Adiciona item</button>
-
-						<br /><br />
-					</div>
-
-				</fieldset>
-			</form>
-		</div>
-	</div>
-	<div class="col-lg-12 col-md-12 col-sm-12">
-		<footer>
-			<div class="col-lg-6">
-				<p>
-					App SimpleMarket © <a href="http://randgross.awardspace.info/" rel="nofollow">Rafael
-						Randow</a> - 2017.
-			</div>
-		</footer>
-	</div>
-	</div>
 </body>
+
 </html>
