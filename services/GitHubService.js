@@ -7,7 +7,7 @@
     function GitHubService($http, $window, $q) {
         var self = this;
 
-        self.PERSONAL_TOKEN = 'da83d009ac48ed07d4967251e69961646ef248be';
+        self.PERSONAL_TOKEN = 'token';
 
         self.PAYLOAD = {
             access_token: self.PERSONAL_TOKEN,

@@ -1,9 +1,7 @@
 <div class="row" ng-controller="GitHubController as ghc">
     
-    {{ghc}}
-    <input ng-model="id" ng-init="id = '0b17bdad1e357de5be808e187524eb10'"/>
+    <input ng-model="id"/>
     <textarea ng-model="ghc.gist.files['produtos.json'].content"></textarea>
-    0b17bdad1e357de5be808e187524eb10
     <button class="btn btn-default" ng-click="ghc.criar(conteudo)">Criar Gist</button>
     <button class="btn btn-default" ng-click="ghc.editar(id, ghc.gist.files)">Editar Gist</button>
     <button class="btn btn-default" ng-click="ghc.carrega(id)">Listar GitHub</button>
