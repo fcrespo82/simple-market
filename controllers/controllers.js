@@ -2,9 +2,12 @@
 var app = angular.module('SimpleMarket')
 
 app.controller('ProdutosCtrl',
-[ '$scope', '$http', 'GitHubService', function($scope, $http, GitHubService) {
+[ '$scope', '$http', 'GitHubService', '$routeParams', function($scope, $http, GitHubService, $routeParams) {
 	var self = this;
 
+self.$postLink = function () {
+	console.log($routeParams)
+}
 	$http.get('data/produtos.json').then(function(data) {
 		var status = localStorage.getItem("status");
 		if (status == null) {

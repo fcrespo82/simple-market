@@ -1,47 +1,92 @@
 (function () {
     'use strict';
 
-    angular.module('SimpleMarket').service('GitHubService', GitHubService);
+    angular.module('SimpleMarket').factory('GitHubService', GitHubService);
 
-    GitHubService.inject = ['$http', '$window'];
-    function GitHubService($http, $window) {
+    GitHubService.inject = ['$http', '$window', '$q'];
+    function GitHubService($http, $window, $q) {
         var self = this;
 
-        self.CLIENT_ID = '3a7fbc75ac6605d7d4fb';
-        self.CLIENT_SECRET = '2733247303fd391bdd349de35b07ddbe9c5d472a';
+        self.PERSONAL_TOKEN = 'da83d009ac48ed07d4967251e69961646ef248be';
 
-        self.pedirAutorizacao = function () {
-            var url = "https://github.com/login/oauth/authorize"
+        self.PAYLOAD = {
+            access_token: self.PERSONAL_TOKEN,
+        };
 
-            var payload = {
-                client_id: self.CLIENT_ID,
-                redirect_uri: "https://fcrespo82.github.io/simple-market/github/authorized",
-                scope: "gist",
-                state: "",
-                allow_signup: "true"
-            };
+        self.dadosUsuario = function () {
+            var deferred = $q.defer();
 
-            url += "?" + Object.keys(payload).map(function (k) {
-                return encodeURIComponent(k) + '=' + encodeURIComponent(payload[k])
-            }).join('&')
+            var url = "https://api.github.com/user";
+            url += "?" + objectToUriCompoment(self.PAYLOAD);
 
-            $window.open(url, "_blank");
+            $http.get(url).then(function (response) {
+                console.log(response);
+                deferred.resolve(response);
+            });
+            return deferred.promise;
         }
 
-        self.pegarTokenDeAcesso = function (code) {
-            var url = "https://github.com/login/oauth/access_token";
+        self.criarGist = function (arquivos) {
+            var deferred = $q.defer();
+
+            var url = "https://api.github.com/gists";
+            url += "?" + objectToUriCompoment(self.PAYLOAD);
+
             var payload = {
-                client_id: self.CLIENT_ID,
-                client_secret: self.CLIENT_SECRET,
-                code: code,
-                redirect_uri: "https://fcrespo82.github.io/simple-market/github/authorized",
-                state: ""
+                files: arquivos,
+                description: "Simple Market data",
+                public: false
             };
 
             $http.post(url, payload).then(function (response) {
-                console.log(response);
+                deferred.resolve(response.data);
             });
+            return deferred.promise;
         };
 
+        self.editarGist = function (idGist, arquivos) {
+            var deferred = $q.defer();
+
+            var url = "https://api.github.com/gists";
+            if (idGist) {
+                url += "/" + idGist;
+            }
+
+            url += "?" + objectToUriCompoment(self.PAYLOAD);
+
+            var payload = {
+                files: arquivos,
+                description: "Simple Market data"
+            };
+
+            $http.patch(url, payload).then(function (response) {
+                console.log(response);
+                deferred.resolve(response.data);
+            });
+            return deferred.promise;
+        };
+
+        self.obterGist = function (idGist) {
+            var deferred = $q.defer();
+
+            var url = "https://api.github.com/gists";
+            if (idGist) {
+                url += "/" + idGist;
+            }
+            url += "?" + objectToUriCompoment(self.PAYLOAD);
+
+            $http.get(url).then(function (response) {
+                deferred.resolve(response.data);
+            });
+            return deferred.promise;
+        };
+
+        return self;
+    }
+
+    function objectToUriCompoment(payload) {
+        return Object.keys(payload).map(function (k) {
+            return encodeURIComponent(k) + '=' + encodeURIComponent(payload[k])
+        }).join('&')
     }
 })();
